@@ -23,7 +23,7 @@
         show_code = true;
 
         experimental = {
-          use_window_local_extmarks = true;
+          # use_window_local_extmarks = true;
         };
       };
     };
