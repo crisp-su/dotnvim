@@ -3,16 +3,16 @@
 {
   # Fallback tooling for plain scripts when a project does not pin versions.
   extraPackagesAfter = with pkgs; [
-    pyright
     ruff
+    pyright
   ];
+
+  # Python linters are selected per-buffer by `Utils.python`.
+  plugins.lint.lintersByFt.python = [ ];
 
   plugins.conform-nvim.settings.formatters_by_ft.python = {
     __raw = "function(bufnr) return Utils.python.formatters(bufnr) end";
   };
-
-  # Python linters are selected per-buffer by `Utils.python`.
-  plugins.lint.lintersByFt.python = [ ];
 
   autoCmd = [
     {

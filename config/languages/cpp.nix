@@ -23,17 +23,17 @@
     packageFallback = true;
   };
 
+  plugins.lint.lintersByFt = {
+    c = [ ];
+    cpp = [ ];
+  };
+
   plugins.conform-nvim.settings.formatters_by_ft = {
     c = [ "clang-format" ];
     cpp = [ "clang-format" ];
     cuda = [ "clang-format" ];
     objc = [ "clang-format" ];
     objcpp = [ "clang-format" ];
-  };
-
-  plugins.lint.lintersByFt = {
-    c = [ ];
-    cpp = [ ];
   };
 
   autoCmd = [

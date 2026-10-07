@@ -19,16 +19,16 @@
     };
   };
 
-  plugins.conform-nvim.settings.formatters_by_ft = {
-    bash = [ "shfmt" ];
-    sh = [ "shfmt" ];
-  };
-
   plugins.lint.lintersByFt = {
     bash = [
       "bash"
       "shellcheck"
     ];
     sh = [ "shellcheck" ];
+  };
+
+  plugins.conform-nvim.settings.formatters_by_ft = {
+    bash = [ "shfmt" ];
+    sh = [ "shfmt" ];
   };
 }

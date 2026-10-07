@@ -2,16 +2,14 @@
 
 {
   extraPackagesAfter = with pkgs; [
-    prettierd
     yamllint
+    prettierd
   ];
 
   plugins.lsp.servers.yamlls = {
     enable = true;
     packageFallback = true;
   };
-
-  plugins.conform-nvim.settings.formatters_by_ft.yaml = [ "prettierd" ];
 
   plugins.lint.lintersByFt.yaml = [ "yamllint" ];
 
@@ -32,6 +30,8 @@
       end
     end
   '';
+
+  plugins.conform-nvim.settings.formatters_by_ft.yaml = [ "prettierd" ];
 
   plugins.schemastore.yaml = {
     enable = true;

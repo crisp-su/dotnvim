@@ -112,40 +112,6 @@ end
 
 --- @param bufnr number
 --- @return string[]
-function M.formatters(bufnr)
-  local state = M.detect(bufnr)
-  local tools = state.tools
-  local formatters = {}
-
-  if not state.has_project_config then
-    if executable('ruff') then
-      return { 'ruff_organize_imports', 'ruff_format' }
-    end
-
-    return {}
-  end
-
-  if tools.isort and executable('isort') then
-    table.insert(formatters, 'isort')
-  elseif tools.ruff and executable('ruff') and not tools.black then
-    table.insert(formatters, 'ruff_organize_imports')
-  end
-
-  if tools.black and executable('black') then
-    table.insert(formatters, 'black')
-  elseif tools.ruff and executable('ruff') and (tools.ruff_format or not (tools.autopep8 or tools.yapf)) then
-    table.insert(formatters, 'ruff_format')
-  elseif tools.autopep8 and executable('autopep8') then
-    table.insert(formatters, 'autopep8')
-  elseif tools.yapf and executable('yapf') then
-    table.insert(formatters, 'yapf')
-  end
-
-  return formatters
-end
-
---- @param bufnr number
---- @return string[]
 function M.linters(bufnr)
   local state = M.detect(bufnr)
   local tools = state.tools
@@ -176,6 +142,40 @@ function M.linters(bufnr)
   end
 
   return linters
+end
+
+--- @param bufnr number
+--- @return string[]
+function M.formatters(bufnr)
+  local state = M.detect(bufnr)
+  local tools = state.tools
+  local formatters = {}
+
+  if not state.has_project_config then
+    if executable('ruff') then
+      return { 'ruff_organize_imports', 'ruff_format' }
+    end
+
+    return {}
+  end
+
+  if tools.isort and executable('isort') then
+    table.insert(formatters, 'isort')
+  elseif tools.ruff and executable('ruff') and not tools.black then
+    table.insert(formatters, 'ruff_organize_imports')
+  end
+
+  if tools.black and executable('black') then
+    table.insert(formatters, 'black')
+  elseif tools.ruff and executable('ruff') and (tools.ruff_format or not (tools.autopep8 or tools.yapf)) then
+    table.insert(formatters, 'ruff_format')
+  elseif tools.autopep8 and executable('autopep8') then
+    table.insert(formatters, 'autopep8')
+  elseif tools.yapf and executable('yapf') then
+    table.insert(formatters, 'yapf')
+  end
+
+  return formatters
 end
 
 --- @param bufnr number

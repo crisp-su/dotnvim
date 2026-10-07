@@ -10,9 +10,9 @@
     packageFallback = true;
   };
 
-  plugins.conform-nvim.settings.formatters_by_ft.fish = [ "fish_indent" ];
-
   plugins.lint.lintersByFt.fish = [ "fish" ];
+
+  plugins.conform-nvim.settings.formatters_by_ft.fish = [ "fish_indent" ];
 
   autoCmd = [
     {
