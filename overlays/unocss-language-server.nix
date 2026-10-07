@@ -23,12 +23,20 @@ final: prev: {
 
       prePnpmInstall = "";
 
+      postPatch = ''
+        cat > pnpm-workspace.yaml <<'EOF'
+        minimumReleaseAge: 0
+        trustLockfile: true
+        verifyDepsBeforeRun: false
+        EOF
+      '';
+
       pnpmDeps = prev.fetchPnpmDeps {
         inherit pname version src;
         inherit (prev) pnpm;
         prePnpmInstall = "";
         fetcherVersion = 4;
-        hash = "sha256-Nt1y1UXxEf42Zq2ulmss6qkgESl9cwvcomFrWOGjFLk=";
+        hash = "sha256-yYV+0ZnaeY6BX24cpXgL/dxKoJePQmKVpW9KAOBbzaw=";
       };
 
       buildPhase = /* bash */ ''
@@ -39,6 +47,7 @@ final: prev: {
 
       postBuild = /* bash */ ''
         pnpm prune --prod
+        find node_modules -type l -xtype l -delete
       '';
 
       installPhase = /* bash */ ''
