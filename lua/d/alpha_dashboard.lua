@@ -7,7 +7,7 @@
 
 local utils = {
   wk = require('utils.which-key'),
-  format = require('utils.format'),
+  strings = require('utils.strings'),
 }
 
 --- @param rhs KeymapRhs
@@ -165,7 +165,7 @@ local elements = {
         local nvim_version_str = string.format('%d.%d', nvim_version.major, nvim_version.minor)
 
         local str = '[ '
-          .. utils.format.pad_center_text_line(string.format('NEOVIM v%s', nvim_version_str), '=', 64, 2)
+          .. utils.strings.pad_center_text_line(string.format('NEOVIM v%s', nvim_version_str), '=', 64, 2)
           .. ' ]'
         return str
       end,
@@ -183,7 +183,7 @@ local elements = {
       type = 'text',
 
       val = function()
-        local str = '[ ' .. utils.format.pad_center_text_line('', '=', 64, 0) .. ' ]'
+        local str = '[ ' .. utils.strings.pad_center_text_line('', '=', 64, 0) .. ' ]'
         return str
       end,
 

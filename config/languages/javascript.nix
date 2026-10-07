@@ -1,16 +1,21 @@
 { pkgs, lib, ... }:
 
 {
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
+    oxfmt
+    deno
+    eslint_d
     prettierd
   ];
 
   plugins.lsp.servers.ts_ls = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.lsp.servers.eslint = {
     enable = true;
+    packageFallback = true;
 
     filetypes = lib.mkAfter [
       "javascript"
@@ -24,25 +29,17 @@
 
   plugins.lsp.servers.oxlint = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.lsp.servers.denols = {
     enable = true;
-    package = null;
+    packageFallback = true;
   };
 
   plugins.conform-nvim.settings.formatters_by_ft =
     let
-      formatters =
-        lib.nixvim.utils.listToUnkeyedAttrs [
-          "oxfmt"
-          "deno_fmt"
-          "eslint_d"
-          "prettierd"
-        ]
-        // {
-          stop_after_first = true;
-        };
+      formatters.__raw = "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
     in
     {
       javascript = formatters;

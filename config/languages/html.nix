@@ -1,17 +1,12 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
+    oxfmt
+    deno
     prettierd
   ];
 
-  plugins.conform-nvim.settings.formatters_by_ft.html =
-    lib.nixvim.utils.listToUnkeyedAttrs [
-      "oxfmt"
-      "deno_fmt"
-      "prettierd"
-    ]
-    // {
-      stop_after_first = true;
-    };
+  plugins.conform-nvim.settings.formatters_by_ft.html.__raw =
+    "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'prettierd' }) end";
 }

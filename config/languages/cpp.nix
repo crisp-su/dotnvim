@@ -1,6 +1,13 @@
+{ pkgs, ... }:
+
 {
+  extraPackagesAfter = with pkgs; [
+    clang-tools
+  ];
+
   plugins.lsp.servers.clangd = {
     enable = true;
+    packageFallback = true;
 
     cmd = [
       "clangd"
@@ -13,6 +20,7 @@
 
   plugins.lsp.servers.neocmake = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.conform-nvim.settings.formatters_by_ft = {
@@ -24,7 +32,19 @@
   };
 
   plugins.lint.lintersByFt = {
-    c = [ "clangtidy" ];
-    cpp = [ "clangtidy" ];
+    c = [ ];
+    cpp = [ ];
   };
+
+  autoCmd = [
+    {
+      group = "Auto";
+      event = "FileType";
+      pattern = [
+        "c"
+        "cpp"
+      ];
+      callback.__raw = "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'clangtidy' }) end";
+    }
+  ];
 }

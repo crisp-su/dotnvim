@@ -1,12 +1,13 @@
 { pkgs, ... }:
 
 {
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
     fish
   ];
 
   plugins.lsp.servers.fish_lsp = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.conform-nvim.settings.formatters_by_ft.fish = [ "fish_indent" ];

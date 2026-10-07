@@ -2,7 +2,7 @@
 
 {
   # Fallback tooling for plain scripts when a project does not pin versions.
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
     pyright
     ruff
   ];

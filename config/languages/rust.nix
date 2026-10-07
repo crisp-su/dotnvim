@@ -6,6 +6,8 @@
     };
   };
 
-  # Use `rust-analyzer` in the runtime environment
-  dependencies.rust-analyzer.enable = false;
+  dependencies.rust-analyzer = {
+    enable = true;
+    packageFallback = true;
+  };
 }

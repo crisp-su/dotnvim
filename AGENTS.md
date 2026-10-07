@@ -77,6 +77,7 @@ Guidance for coding agents working in this repository.
 
 - Use 2-space indentation and keep lines near 120 chars.
 - Prefer explicit attr sets with trailing semicolons.
+- Write package lists as `with pkgs; [ ... ];` instead of repeated `pkgs.xxx` entries.
 - Keep function arg sets multiline and stable (commonly `{ config, lib, lib', pkgs, ... }:`).
 - Keep `let ... in` blocks focused and short.
 - Prefer `lib.mkIf` / `lib.mkMerge` over ad-hoc branching.
@@ -130,6 +131,17 @@ Guidance for coding agents working in this repository.
 - Preferred triggers: `cmd` for command tools, `ft` for filetype plugins, `event` for deferred startup.
 - Ensure keymaps, setup hooks, and plugin integrations still work after lazy-loading.
 - Add `pcall(require, ...)` guards when code may run before plugin load.
+
+## Tool package fallbacks
+
+- Add external tool packages (formatters, linters, language servers, CLI dependencies) at low priority so project environments (e.g. devshells) win:
+  - Use `extraPackagesAfter = with pkgs; [ ... ];` for plain packages (appended to the end of `PATH`).
+  - Set `packageFallback = true` on `plugins.lsp.servers.<name>` and `dependencies.<name>`.
+- Declare tool packages in the module that uses them; duplicates across modules are acceptable.
+- Reserve `extraPackages` (PATH prefix) for packages that must override the environment.
+- The merged `extraPackagesAfter` bin dirs are exposed to Lua as `Utils.toolchain.fallback_bins` (generated in `config/luaset.nix`).
+- Multi-candidate formatter lists must select via `Utils.formatter.pick` (see `lua/utils/formatter.lua`) instead of `stop_after_first`, because all candidates are always available through the fallback `PATH` entries.
+- Gate linters that also ship with a fallback package behind the environment via `Utils.linter.set_external_linters` (see `lua/utils/linter.lua`).
 
 ## Commit and PR conventions
 

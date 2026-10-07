@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
     bash
     shellcheck
     shfmt
@@ -9,6 +9,7 @@
 
   plugins.lsp.servers.bashls = {
     enable = true;
+    packageFallback = true;
 
     settings = {
       bashIde = {

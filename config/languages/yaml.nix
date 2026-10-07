@@ -1,13 +1,14 @@
 { pkgs, ... }:
 
 {
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
     prettierd
     yamllint
   ];
 
   plugins.lsp.servers.yamlls = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.conform-nvim.settings.formatters_by_ft.yaml = [ "prettierd" ];

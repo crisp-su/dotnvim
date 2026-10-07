@@ -1,9 +1,12 @@
 { pkgs, ... }:
 
 {
-  dependencies.go.enable = false;
+  dependencies.go = {
+    enable = true;
+    packageFallback = true;
+  };
 
-  extraPackages = with pkgs; [
+  extraPackagesAfter = with pkgs; [
     golangci-lint
     gotools
     gofumpt
@@ -12,10 +15,12 @@
 
   plugins.lsp.servers.gopls = {
     enable = true;
+    packageFallback = true;
   };
 
   plugins.lsp.servers.golangci_lint_ls = {
     enable = true;
+    packageFallback = true;
 
     rootMarkers = [ "go.mod" ];
   };
