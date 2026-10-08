@@ -36,7 +36,7 @@
         nixfmt = mkCheck "nixfmt-check" [ pkgs.nixfmt ] "nixfmt --check .";
         prettier = mkCheck "prettier-check" [ pkgs.prettier ] "prettier --check .";
         statix = mkCheck "statix-check" [ pkgs.statix ] "statix check .";
-        stylua = mkCheck "stylua-check" [ pkgs.stylua ] "stylua --check .";
+        stylua = mkCheck "stylua-check" [ pkgs.stylua-fork ] "stylua --check .";
       };
     };
 }

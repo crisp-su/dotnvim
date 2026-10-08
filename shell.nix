@@ -9,7 +9,7 @@ pkgs.mkShell {
     nil
     statix
     nixfmt
-    stylua
+    stylua-fork
     prettier
   ];
 
