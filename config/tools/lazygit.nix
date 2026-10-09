@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.snacks.settings.lazygit = {
@@ -12,7 +12,7 @@
       (mkSpec
         [
           "<leader>gl"
-          { __raw = /* lua */ "function() Snacks.lazygit() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() Snacks.lazygit() end")
         ]
         {
           desc = "Lazygit";

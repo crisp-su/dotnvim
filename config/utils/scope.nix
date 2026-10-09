@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.scope = {
@@ -7,8 +7,8 @@
 
     settings = {
       hooks = {
-        post_tab_enter.__raw = /* lua */ "function() vim.cmd.redrawtabline() end";
-        post_tab_close.__raw = /* lua */ "function() vim.cmd.redrawtabline() end";
+        post_tab_enter = lib.nixvim.mkRaw /* lua */ "function() vim.cmd.redrawtabline() end";
+        post_tab_close = lib.nixvim.mkRaw /* lua */ "function() vim.cmd.redrawtabline() end";
       };
     };
   };

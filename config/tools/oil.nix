@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.oil = {
@@ -36,11 +36,11 @@
 
       view_options = {
         show_hidden = true;
-        is_always_hidden.__raw = /* lua */ "Utils.oil.is_always_hidden";
+        is_always_hidden = lib.nixvim.mkRaw /* lua */ "Utils.oil.is_always_hidden";
       };
 
       preview_win = {
-        disable_preview.__raw = /* lua */ "Utils.oil.disable_preview";
+        disable_preview = lib.nixvim.mkRaw /* lua */ "Utils.oil.disable_preview";
       };
 
       use_default_keymaps = false;
@@ -49,10 +49,10 @@
         "<C-r>" = "actions.refresh";
 
         L = {
-          callback.__raw = /* lua */ "Utils.oil.select";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.select";
         };
         "<cr>" = {
-          callback.__raw = /* lua */ "Utils.oil.select";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.select";
         };
         H = "actions.parent";
 
@@ -64,18 +64,18 @@
         "<space>" = "actions.preview";
 
         gd = {
-          callback.__raw = /* lua */ "Utils.oil.toggle_details";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.toggle_details";
           desc = "Toggle detail view";
         };
 
         "-" = {
-          callback.__raw = /* lua */ "Utils.oil.close";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.close";
         };
         "<C-w>q" = {
-          callback.__raw = /* lua */ "Utils.oil.close";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.close";
         };
         "<C-c>" = {
-          callback.__raw = /* lua */ "Utils.oil.close";
+          callback = lib.nixvim.mkRaw /* lua */ "Utils.oil.close";
         };
       };
     };
@@ -85,7 +85,7 @@
     (mkSpec
       [
         "<leader>fo"
-        { __raw = /* lua */ "function() Utils.oil.open_root_tab() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() Utils.oil.open_root_tab() end")
       ]
       {
         desc = "Explorer Oil (Root Dir)";
@@ -95,7 +95,7 @@
     (mkSpec
       [
         "<leader>fO"
-        { __raw = /* lua */ "function() Utils.oil.open_cwd_tab() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() Utils.oil.open_cwd_tab() end")
       ]
       {
         desc = "Explorer Oil (cwd)";
@@ -106,7 +106,7 @@
     (mkSpec
       [
         "-"
-        { __raw = /* lua */ "function() Utils.oil.open_parent_tab() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() Utils.oil.open_parent_tab() end")
       ]
       {
         desc = "Explorer Oil (Parent Dir)";

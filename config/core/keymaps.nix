@@ -74,14 +74,12 @@
       (mkSpec
         [
           "<esc>"
-          {
-            __raw = /* lua */ ''
-              function()
-                vim.cmd.noh()
-                return '<esc>'
-              end
-            '';
-          }
+          (lib.nixvim.mkRaw /* lua */ ''
+            function()
+              vim.cmd.noh()
+              return '<esc>'
+            end
+          '')
         ]
         {
           desc = "Escape and Clear hlsearch";
@@ -94,15 +92,13 @@
         mkSpec
           [
             "<C-f>"
-            {
-              __raw = /* lua */ ''
-                function()
-                  if not require('noice.lsp').scroll(4) then
-                    return '<c-f>'
-                  end
+            (lib.nixvim.mkRaw /* lua */ ''
+              function()
+                if not require('noice.lsp').scroll(4) then
+                  return '<c-f>'
                 end
-              '';
-            }
+              end
+            '')
           ]
           {
             desc = "Scroll Forward";
@@ -114,15 +110,13 @@
         mkSpec
           [
             "<C-b>"
-            {
-              __raw = /* lua */ ''
-                function()
-                  if not require('noice.lsp').scroll(-4) then
-                    return '<c-b>'
-                  end
+            (lib.nixvim.mkRaw /* lua */ ''
+              function()
+                if not require('noice.lsp').scroll(-4) then
+                  return '<c-b>'
                 end
-              '';
-            }
+              end
+            '')
           ]
           {
             desc = "Scroll Backward";
@@ -214,7 +208,7 @@
         mkSpec
           [
             "<leader>bd"
-            { __raw = /* lua */ "function() Snacks.bufdelete() end"; }
+            (lib.nixvim.mkRaw /* lua */ "function() Snacks.bufdelete() end")
           ]
           {
             desc = "Delete Buffer";
@@ -225,7 +219,7 @@
         mkSpec
           [
             "<leader>bo"
-            { __raw = /* lua */ "function() Snacks.bufdelete.other() end"; }
+            (lib.nixvim.mkRaw /* lua */ "function() Snacks.bufdelete.other() end")
           ]
           {
             desc = "Delete Other Buffers";

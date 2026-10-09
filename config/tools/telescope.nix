@@ -34,27 +34,27 @@
         prompt_prefix = icons.prompt.Input.line + " ";
         selection_caret = icons.prompt.ListSelection.line + " ";
 
-        create_layout.__raw = /* lua */ "require('d.telescope_layout')";
+        create_layout = lib.nixvim.mkRaw /* lua */ "require('d.telescope_layout')";
 
         mappings = {
           i = {
-            "<esc>".__raw = /* lua */ ''
+            "<esc>" = lib.nixvim.mkRaw /* lua */ ''
               function(bufnr)
                 require('telescope.actions').close(bufnr)
                 vim.schedule(function() vim.cmd.stopinsert() end)
               end
             '';
 
-            "<C-j>".__raw = /* lua */ "require('telescope.actions').move_selection_next";
-            "<C-k>".__raw = /* lua */ "require('telescope.actions').move_selection_previous";
-            "<C-d>".__raw = /* lua */ "require('telescope.actions').results_scrolling_down";
-            "<C-u>".__raw = /* lua */ "require('telescope.actions').results_scrolling_up";
-            "<C-f>".__raw = /* lua */ "require('telescope.actions').preview_scrolling_down";
-            "<C-b>".__raw = /* lua */ "require('telescope.actions').preview_scrolling_up";
-            "<A-n>".__raw = /* lua */ "require('telescope.actions').cycle_history_next";
-            "<A-p>".__raw = /* lua */ "require('telescope.actions').cycle_history_prev";
+            "<C-j>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').move_selection_next";
+            "<C-k>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').move_selection_previous";
+            "<C-d>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').results_scrolling_down";
+            "<C-u>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').results_scrolling_up";
+            "<C-f>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').preview_scrolling_down";
+            "<C-b>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').preview_scrolling_up";
+            "<A-n>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').cycle_history_next";
+            "<A-p>" = lib.nixvim.mkRaw /* lua */ "require('telescope.actions').cycle_history_prev";
 
-            "<cr>".__raw = /* lua */ ''
+            "<cr>" = lib.nixvim.mkRaw /* lua */ ''
               function(bufnr)
                 require('telescope.actions').select_default(bufnr)
                 vim.schedule(function() vim.cmd.stopinsert() end)
@@ -100,9 +100,7 @@
       (mkSpec
         [
           "<leader>ff"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').find_files({ cwd = Utils.root() }) end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').find_files({ cwd = Utils.root() }) end")
         ]
         {
           desc = "Find Files (Root Dir)";
@@ -113,9 +111,7 @@
       (mkSpec
         [
           "<leader>fF"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').find_files({ cwd = vim.uv.cwd() }) end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').find_files({ cwd = vim.uv.cwd() }) end")
         ]
         {
           desc = "Find Files (cwd)";
@@ -126,9 +122,7 @@
       (mkSpec
         [
           "<leader>fg"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').live_grep({ cwd = Utils.root() }) end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').live_grep({ cwd = Utils.root() }) end")
         ]
         {
           desc = "Live Grep (Root Dir)";
@@ -139,9 +133,7 @@
       (mkSpec
         [
           "<leader>fG"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').live_grep({ cwd = vim.uv.cwd() }) end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').live_grep({ cwd = vim.uv.cwd() }) end")
         ]
         {
           desc = "Live Grep (cwd)";
@@ -152,9 +144,9 @@
       (mkSpec
         [
           "<leader>fb"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').buffers({ sort_mru = true, sort_lastused = true }) end";
-          }
+          (lib.nixvim.mkRaw
+            /* lua */ "function() require('telescope.builtin').buffers({ sort_mru = true, sort_lastused = true }) end"
+          )
         ]
         {
           desc = "Buffers";
@@ -166,21 +158,19 @@
         mkSpec
           [
             "<leader>fB"
-            {
-              __raw = /* lua */ ''
-                function()
-                  local telescope = require('telescope')
-                  pcall(telescope.load_extension, 'scope')
+            (lib.nixvim.mkRaw /* lua */ ''
+              function()
+                local telescope = require('telescope')
+                pcall(telescope.load_extension, 'scope')
 
-                  if telescope.extensions.scope and telescope.extensions.scope.buffers then
-                    telescope.extensions.scope.buffers()
-                    return
-                  end
-
-                  require('telescope.builtin').buffers()
+                if telescope.extensions.scope and telescope.extensions.scope.buffers then
+                  telescope.extensions.scope.buffers()
+                  return
                 end
-              '';
-            }
+
+                require('telescope.builtin').buffers()
+              end
+            '')
           ]
           {
             desc = "Buffers (All Tabs)";
@@ -192,9 +182,7 @@
         mkSpec
           [
             "<leader>fB"
-            {
-              __raw = /* lua */ "function() require('telescope.builtin').buffers() end";
-            }
+            (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').buffers() end")
           ]
           {
             desc = "Buffers (all)";
@@ -205,9 +193,7 @@
       (mkSpec
         [
           "<leader>fh"
-          {
-            __raw = /* lua */ "function() require('telescope.builtin').help_tags() end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').help_tags() end")
         ]
         {
           desc = "Help Tags";
@@ -218,9 +204,7 @@
       (mkSpec
         [
           "<leader>fP"
-          {
-            __raw = /* lua */ "function() require('telescope').extensions.media_files.media_files() end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope').extensions.media_files.media_files() end")
         ]
         {
           desc = "Help Tags";

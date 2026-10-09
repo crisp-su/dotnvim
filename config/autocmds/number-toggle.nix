@@ -1,10 +1,12 @@
+{ lib, ... }:
+
 {
   autoCmd = [
     {
       group = "Auto";
       event = "CmdlineEnter";
       pattern = "*";
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           vim.w.pre_cmdline_relativenumber = vim.opt_local.relativenumber:get()
 
@@ -20,7 +22,7 @@
       group = "Auto";
       event = "CmdlineLeave";
       pattern = "*";
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           if vim.w.pre_cmdline_relativenumber ~= nil then
             vim.opt_local.relativenumber = vim.w.pre_cmdline_relativenumber

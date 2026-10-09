@@ -39,7 +39,7 @@ with lib.nixvim.utils;
           (
             listToUnkeyedAttrs [ "mode" ]
             // {
-              fmt.__raw = /* lua */ ''
+              fmt = lib.nixvim.mkRaw /* lua */ ''
                 function(str)
                   local mode_map = {
                     ['NORMAL'] = '(=^・・^=)',
@@ -104,7 +104,7 @@ with lib.nixvim.utils;
               (mkRaw /* lua */ "function() return string.format('Recording @%s', vim.fn.reg_recording()) end")
             ]
             // {
-              cond.__raw = /* lua */ "function() return vim.fn.reg_recording() ~= '' end";
+              cond = lib.nixvim.mkRaw /* lua */ "function() return vim.fn.reg_recording() ~= '' end";
 
               color = "@text.danger";
             }
@@ -115,8 +115,10 @@ with lib.nixvim.utils;
               (mkRaw /* lua */ "function() return require('noice').api.status.command.get() end")
             ]
             // {
-              cond.__raw = /* lua */ "function() return package.loaded['noice'] and require('noice').api.status.command.has() end";
-              color.__raw = /* lua */ "function() return { fg = Snacks.util.color('Statement') } end";
+              cond =
+                lib.nixvim.mkRaw
+                  /* lua */ "function() return package.loaded['noice'] and require('noice').api.status.command.has() end";
+              color = lib.nixvim.mkRaw /* lua */ "function() return { fg = Snacks.util.color('Statement') } end";
             }
           ))
 
@@ -136,7 +138,7 @@ with lib.nixvim.utils;
           (
             listToUnkeyedAttrs [ "location" ]
             // {
-              fmt.__raw = /* lua */ "function(str) return string.format('[%s]', str) end";
+              fmt = lib.nixvim.mkRaw /* lua */ "function(str) return string.format('[%s]', str) end";
 
               padding = {
                 left = 1;
@@ -154,7 +156,7 @@ with lib.nixvim.utils;
   };
 
   colorschemes.catppuccin.settings.special.lualine = true;
-  plugins.lualine.settings.options.theme.__raw = /* lua */ ''
+  plugins.lualine.settings.options.theme = lib.nixvim.mkRaw /* lua */ ''
     (function()
       if (vim.g.colors_name or '''):find('catppuccin') then
         return 'catppuccin'

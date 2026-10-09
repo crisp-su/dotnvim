@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.gitsigns = {
@@ -58,17 +58,15 @@
     (mkSpec
       [
         "]h"
-        {
-          __raw = /* lua */ ''
-            function()
-              if vim.wo.diff then
-                vim.cmd.normal({ ']c', bang = true })
-              else
-                require('gitsigns').nav_hunk('next')
-              end
+        (lib.nixvim.mkRaw /* lua */ ''
+          function()
+            if vim.wo.diff then
+              vim.cmd.normal({ ']c', bang = true })
+            else
+              require('gitsigns').nav_hunk('next')
             end
-          '';
-        }
+          end
+        '')
       ]
       {
         desc = "Next Hunk";
@@ -78,17 +76,15 @@
     (mkSpec
       [
         "[h"
-        {
-          __raw = /* lua */ ''
-            function()
-              if vim.wo.diff then
-                vim.cmd.normal({ '[c', bang = true })
-              else
-                require('gitsigns').nav_hunk('prev')
-              end
+        (lib.nixvim.mkRaw /* lua */ ''
+          function()
+            if vim.wo.diff then
+              vim.cmd.normal({ '[c', bang = true })
+            else
+              require('gitsigns').nav_hunk('prev')
             end
-          '';
-        }
+          end
+        '')
       ]
       {
         desc = "Prev Hunk";
@@ -98,7 +94,7 @@
     (mkSpec
       [
         "]H"
-        { __raw = /* lua */ "function() require('gitsigns').nav_hunk('last') end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('gitsigns').nav_hunk('last') end")
       ]
       {
         desc = "Last Hunk";
@@ -108,7 +104,7 @@
     (mkSpec
       [
         "[H"
-        { __raw = /* lua */ "function() require('gitsigns').nav_hunk('first') end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('gitsigns').nav_hunk('first') end")
       ]
       {
         desc = "First Hunk";
@@ -119,7 +115,7 @@
     (mkSpec
       [
         "<space>gd"
-        { __raw = /* lua */ "function() require('gitsigns').diffthis() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('gitsigns').diffthis() end")
       ]
       {
         desc = "Diff This";
@@ -129,7 +125,7 @@
     (mkSpec
       [
         "<space>gd"
-        { __raw = /* lua */ "function() require('gitsigns').diffthis() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('gitsigns').diffthis() end")
       ]
       {
         desc = "Diff This";

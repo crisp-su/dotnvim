@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.flash = {
@@ -48,7 +48,7 @@
     (mkSpec
       [
         "s"
-        { __raw = /* lua */ "function() require('flash').jump() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('flash').jump() end")
       ]
       {
         desc = "Flash Jump";
@@ -58,7 +58,7 @@
     (mkSpec
       [
         "S"
-        { __raw = /* lua */ "function() require('flash').treesitter() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('flash').treesitter() end")
       ]
       {
         desc = "Flash Treesitter";

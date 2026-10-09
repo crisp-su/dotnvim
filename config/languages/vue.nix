@@ -27,6 +27,7 @@
     packageFallback = true;
   };
 
-  plugins.conform-nvim.settings.formatters_by_ft.vue.__raw =
-    /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
+  plugins.conform-nvim.settings.formatters_by_ft.vue =
+    lib.nixvim.mkRaw
+      /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
 }

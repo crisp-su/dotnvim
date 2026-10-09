@@ -17,7 +17,7 @@
     (mkSpec
       [
         "<leader>qs"
-        { __raw = /* lua */ "function() require('persistence').load() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('persistence').load() end")
       ]
       {
         desc = "Restore Session";
@@ -27,7 +27,7 @@
     (mkSpec
       [
         "<leader>qS"
-        { __raw = /* lua */ "function() require('persistence').select() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('persistence').select() end")
       ]
       {
         desc = "Select Session";
@@ -37,7 +37,7 @@
     (mkSpec
       [
         "<leader>qd"
-        { __raw = /* lua */ "function() require('persistence').stop() end"; }
+        (lib.nixvim.mkRaw /* lua */ "function() require('persistence').stop() end")
       ]
       {
         desc = "Don't Save Current Session";
@@ -52,7 +52,7 @@
       desc = "Save scope state before persistence session save";
       event = "User";
       pattern = "PersistenceSavePre";
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           if vim.fn.exists(':ScopeSaveState') == 2 then
             vim.cmd.ScopeSaveState()
@@ -66,7 +66,7 @@
       desc = "Reset scope state before persistence session load";
       event = "User";
       pattern = "PersistenceLoadPre";
-      callback.__raw = /* lua */ "function() vim.g.ScopeState = nil end";
+      callback = lib.nixvim.mkRaw /* lua */ "function() vim.g.ScopeState = nil end";
     }
 
     {
@@ -74,7 +74,7 @@
       desc = "Restore scope state after persistence session load";
       event = "User";
       pattern = "PersistenceLoadPost";
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           if vim.fn.exists(':ScopeLoadState') == 2 then
             vim.cmd.ScopeLoadState()

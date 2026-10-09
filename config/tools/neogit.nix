@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.neogit = {
@@ -41,9 +41,7 @@
       (mkSpec
         [
           "<leader>gg"
-          {
-            __raw = /* lua */ "function() vim.cmd.Neogit({ 'cwd=' .. vim.fn.fnameescape(Utils.root()) }) end";
-          }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.cmd.Neogit({ 'cwd=' .. vim.fn.fnameescape(Utils.root()) }) end")
         ]
         {
           desc = "Neogit";

@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.lsp = {
@@ -11,9 +11,7 @@
     with lib'.utils.wk;
     with lib'.icons;
     let
-      languageIcon = {
-        __raw = /* lua */ "Utils.lsp.language_icon()";
-      };
+      languageIcon = lib.nixvim.mkRaw /* lua */ "Utils.lsp.language_icon()";
     in
     [
       # Hide default lsp keymaps (Neovim 0.10+)
@@ -26,7 +24,7 @@
       (mkSpec
         [
           "<leader>cl"
-          { __raw = /* lua */ "function() Snacks.picker.lsp_config() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() Snacks.picker.lsp_config() end")
         ]
         {
           desc = "Lsp Info";
@@ -38,78 +36,78 @@
       (mkSpec
         [
           "gd"
-          { __raw = /* lua */ "function() vim.lsp.buf.definition() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.definition() end")
         ]
         {
           desc = "Go to Definition";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('definition')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('definition')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gr"
-          { __raw = /* lua */ "function() vim.lsp.buf.references() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.references() end")
         ]
         {
           desc = "Go to References";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('references')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('references')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gI"
-          { __raw = /* lua */ "function() vim.lsp.buf.implementation() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.implementation() end")
         ]
         {
           desc = "Go to Implementation";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('implementation')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('implementation')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gY"
-          { __raw = /* lua */ "function() vim.lsp.buf.type_definition() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.type_definition() end")
         ]
         {
           desc = "Go to Type Definition";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('typeDefinition')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('typeDefinition')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gD"
-          { __raw = /* lua */ "function() vim.lsp.buf.declaration() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.declaration() end")
         ]
         {
           desc = "Go to Declaration";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('declaration')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('declaration')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gO"
-          { __raw = /* lua */ "function() vim.lsp.buf.document_symbol() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.document_symbol() end")
         ]
         {
           desc = "List All Symbols";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('documentSymbol')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('documentSymbol')";
           refresh = true;
         }
       )
@@ -117,7 +115,7 @@
       (mkSpec
         [
           "K"
-          { __raw = /* lua */ "function() vim.lsp.buf.hover() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.hover() end")
         ]
         {
           desc = "Hover";
@@ -128,13 +126,13 @@
       (mkSpec
         [
           "gK"
-          { __raw = /* lua */ "function() vim.lsp.buf.signature_help() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.signature_help() end")
         ]
         {
           desc = "Signature Help";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('signatureHelp')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('signatureHelp')";
           refresh = true;
         }
       )
@@ -142,26 +140,26 @@
       (mkSpec
         [
           "<leader>cr"
-          { __raw = /* lua */ "function() vim.lsp.buf.rename() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.rename() end")
         ]
         {
           desc = "Rename";
           icon = common.Input.line;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('rename')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('rename')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "<leader>cR"
-          { __raw = /* lua */ "function() Snacks.rename.rename_file() end"; }
+          (lib.nixvim.mkRaw /* lua */ "function() Snacks.rename.rename_file() end")
         ]
         {
           desc = "Rename File";
           icon = common.Input.line;
           mode = modes.interact;
-          cond.__raw = /* lua */ "Utils.lsp.has_capability('workspace/willRenameFiles')";
+          cond = lib.nixvim.mkRaw /* lua */ "Utils.lsp.has_capability('workspace/willRenameFiles')";
           refresh = true;
         }
       )
@@ -175,7 +173,7 @@
         "LspAttach"
         "LspDetach"
       ];
-      callback.__raw = /* lua */ "function() Utils.wk.refresh() end";
+      callback = lib.nixvim.mkRaw /* lua */ "function() Utils.wk.refresh() end";
     }
   ];
 }

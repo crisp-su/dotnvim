@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.bufferline = {
@@ -8,8 +8,8 @@
       options = {
         diagnostics = "nvim_lsp";
 
-        close_command.__raw = /* lua */ "function(n) Snacks.bufdelete(n) end";
-        right_mouse_command.__raw = /* lua */ "function(n) Snacks.bufdelete(n) end";
+        close_command = lib.nixvim.mkRaw /* lua */ "function(n) Snacks.bufdelete(n) end";
+        right_mouse_command = lib.nixvim.mkRaw /* lua */ "function(n) Snacks.bufdelete(n) end";
 
         always_show_bufferline = false;
         auto_toggle_bufferline = true;
@@ -77,7 +77,7 @@
   ];
 
   colorschemes.catppuccin.settings.integrations.bufferline = true;
-  plugins.bufferline.settings.highlights.__raw = /* lua */ ''
+  plugins.bufferline.settings.highlights = lib.nixvim.mkRaw /* lua */ ''
     (function()
       if (vim.g.colors_name or '''):find('catppuccin') then
         return require('catppuccin.special.bufferline').get_theme()

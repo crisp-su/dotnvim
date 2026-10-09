@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.notify = {
@@ -18,7 +18,7 @@
         TRACE = Trace.fill;
       };
 
-      render.__raw = /* lua */ "require('d.notify_render')";
+      render = lib.nixvim.mkRaw /* lua */ "require('d.notify_render')";
     };
   };
 

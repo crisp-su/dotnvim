@@ -1,4 +1,4 @@
-{ lib', ... }:
+{ lib, lib', ... }:
 
 {
   plugins.neo-tree = {
@@ -59,9 +59,9 @@
     (mkSpec
       [
         "<leader>fe"
-        {
-          __raw = /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = Utils.root() }) end";
-        }
+        (lib.nixvim.mkRaw
+          /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = Utils.root() }) end"
+        )
       ]
       {
         desc = "Explorer NeoTree (Root Dir)";
@@ -71,9 +71,9 @@
     (mkSpec
       [
         "<leader>fE"
-        {
-          __raw = /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = vim.uv.cwd() }) end";
-        }
+        (lib.nixvim.mkRaw
+          /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = vim.uv.cwd() }) end"
+        )
       ]
       {
         desc = "Explorer NeoTree (cwd)";
@@ -83,9 +83,9 @@
     (mkSpec
       [
         "<leader>be"
-        {
-          __raw = /* lua */ "function() require('neo-tree.command').execute({ source = 'buffers', toggle = true }) end";
-        }
+        (lib.nixvim.mkRaw
+          /* lua */ "function() require('neo-tree.command').execute({ source = 'buffers', toggle = true }) end"
+        )
       ]
       {
         desc = "Buffer Explorer";
@@ -95,9 +95,9 @@
     (mkSpec
       [
         "<leader>ge"
-        {
-          __raw = /* lua */ "function() require('neo-tree.command').execute({ source = 'git_status', toggle = true }) end";
-        }
+        (lib.nixvim.mkRaw
+          /* lua */ "function() require('neo-tree.command').execute({ source = 'git_status', toggle = true }) end"
+        )
       ]
       {
         desc = "Git Explorer";
@@ -122,7 +122,7 @@
       group = "HackFix";
       desc = "Refresh Git status in Neo-tree when switching tabs";
       event = "TabEnter";
-      callback.__raw = /* lua */ "function() require('neo-tree.events').fire_event('git_event') end";
+      callback = lib.nixvim.mkRaw /* lua */ "function() require('neo-tree.events').fire_event('git_event') end";
     }
   ];
 

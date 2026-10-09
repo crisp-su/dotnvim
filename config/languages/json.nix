@@ -22,8 +22,9 @@
     ];
   };
 
-  plugins.conform-nvim.settings.formatters_by_ft.json.__raw =
-    /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
+  plugins.conform-nvim.settings.formatters_by_ft.json =
+    lib.nixvim.mkRaw
+      /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
 
   plugins.schemastore.json = {
     enable = true;

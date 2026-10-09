@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   colorschemes = {
     catppuccin = {
@@ -22,7 +24,7 @@
         };
 
         highlight_overrides = {
-          all.__raw = /* lua */ ''
+          all = lib.nixvim.mkRaw /* lua */ ''
             function(colors)
               return {
                 TelescopeSelection = { fg = colors.pink },

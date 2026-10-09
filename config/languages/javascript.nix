@@ -39,7 +39,9 @@
 
   plugins.conform-nvim.settings.formatters_by_ft =
     let
-      formatters.__raw = /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
+      formatters =
+        lib.nixvim.mkRaw
+          /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
     in
     {
       javascript = formatters;

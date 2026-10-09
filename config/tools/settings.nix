@@ -30,7 +30,7 @@ lib.mkIf config.plugins.snacks.enable {
       group = "Lazy";
       desc = "Setup quick settings module";
       event = "VimEnter";
-      callback.__raw = /* lua */ "function() require('d.quick_settings').setup() end";
+      callback = lib.nixvim.mkRaw /* lua */ "function() require('d.quick_settings').setup() end";
     }
   ];
 }

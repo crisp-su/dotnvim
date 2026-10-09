@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   plugins.nvim-autopairs = {
     enable = true;
@@ -13,7 +15,7 @@
       disable_in_visualblock = false;
       disable_in_replace_mode = true;
 
-      ignored_next_char.__raw = ''[=[[%w%%%'%[%"%.%`%$]]=]'';
+      ignored_next_char = lib.nixvim.mkRaw /* lua */ ''[=[[%w%%%'%[%"%.%`%$]]=]'';
 
       enable_moveright = true;
       enable_afterquote = true;

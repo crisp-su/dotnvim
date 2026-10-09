@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   opts = {
     numberwidth = 1;
@@ -28,9 +30,7 @@
         # Fold Signs
         {
           text = [
-            {
-              __raw = /* lua */ "require('statuscol.builtin').foldfunc";
-            }
+            (lib.nixvim.mkRaw /* lua */ "require('statuscol.builtin').foldfunc")
           ];
           click = "v:lua.ScFa";
         }
@@ -55,14 +55,10 @@
         # Line Numbers
         {
           condition = [
-            {
-              __raw = /* lua */ "require('statuscol.builtin').not_empty";
-            }
+            (lib.nixvim.mkRaw /* lua */ "require('statuscol.builtin').not_empty")
           ];
           text = [
-            {
-              __raw = /* lua */ "require('statuscol.builtin').lnumfunc";
-            }
+            (lib.nixvim.mkRaw /* lua */ "require('statuscol.builtin').lnumfunc")
           ];
           click = "v:lua.ScLa";
         }
@@ -99,7 +95,7 @@
         "BufEnter"
         "BufWinEnter"
       ];
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           if not _G.__statuscol_cfg_cache then
             local ok, m = pcall(require, 'statuscol')
@@ -135,7 +131,7 @@
       desc = "Disable statuscol for Neogit buffers";
       event = [ "FileType" ];
       pattern = [ "Neogit*" ];
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function(args)
           vim.schedule(function()
             vim.opt_local.statuscolumn = '''

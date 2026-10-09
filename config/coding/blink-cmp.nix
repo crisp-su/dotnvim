@@ -1,9 +1,13 @@
+{ lib, ... }:
+
 {
   plugins.blink-cmp = {
     enable = true;
 
     settings = {
-      enabled.__raw = /* lua */ "function() return not vim.tbl_contains({ 'text' }, vim.bo.filetype) end";
+      enabled =
+        lib.nixvim.mkRaw
+          /* lua */ "function() return not vim.tbl_contains({ 'text' }, vim.bo.filetype) end";
 
       keymap = {
         preset = "super-tab";
@@ -50,8 +54,12 @@
             ];
             components = {
               label = {
-                text.__raw = /* lua */ "function(ctx) return require('colorful-menu').blink_components_text(ctx) end";
-                highlight.__raw = /* lua */ "function(ctx) return require('colorful-menu').blink_components_highlight(ctx) end";
+                text =
+                  lib.nixvim.mkRaw
+                    /* lua */ "function(ctx) return require('colorful-menu').blink_components_text(ctx) end";
+                highlight =
+                  lib.nixvim.mkRaw
+                    /* lua */ "function(ctx) return require('colorful-menu').blink_components_highlight(ctx) end";
               };
             };
           };
@@ -102,7 +110,7 @@
 
         completion = {
           menu = {
-            auto_show.__raw = /* lua */ "function(ctx) return vim.fn.getcmdtype() == ':' end";
+            auto_show = lib.nixvim.mkRaw /* lua */ "function(ctx) return vim.fn.getcmdtype() == ':' end";
           };
         };
       };

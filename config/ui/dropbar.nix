@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   plugins.dropbar = {
     enable = true;
@@ -14,7 +16,7 @@
           "BufWritePost"
         ];
 
-        sources.__raw = /* lua */ ''
+        sources = lib.nixvim.mkRaw /* lua */ ''
           function(buf, _)
             local sources = require('dropbar.sources')
             local utils = require("dropbar.utils")

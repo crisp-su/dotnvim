@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   extraPackagesAfter = with pkgs; [
@@ -19,7 +19,7 @@
       group = "Auto";
       event = "FileType";
       pattern = "fish";
-      callback.__raw = /* lua */ ''
+      callback = lib.nixvim.mkRaw /* lua */ ''
         function()
           vim.opt_local.expandtab = true
           vim.opt_local.shiftwidth = 4

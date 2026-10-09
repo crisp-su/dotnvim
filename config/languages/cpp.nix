@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   extraPackagesAfter = with pkgs; [
@@ -44,7 +44,9 @@
         "c"
         "cpp"
       ];
-      callback.__raw = /* lua */ "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'clangtidy' }) end";
+      callback =
+        lib.nixvim.mkRaw
+          /* lua */ "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'clangtidy' }) end";
     }
   ];
 }
