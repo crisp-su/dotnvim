@@ -1,9 +1,9 @@
-{ inputs, self }:
+{ self, inputs }:
 
 {
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }:
 

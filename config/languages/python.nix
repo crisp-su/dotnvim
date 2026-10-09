@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Fallback tooling for plain scripts when a project does not pin versions.

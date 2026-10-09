@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   extraPackagesAfter = with pkgs; [

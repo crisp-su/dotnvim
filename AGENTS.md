@@ -78,7 +78,7 @@ Guidance for coding agents working in this repository.
 - Use 2-space indentation and keep lines near 120 chars.
 - Prefer explicit attr sets with trailing semicolons.
 - Write package lists as `with pkgs; [ ... ];` instead of repeated `pkgs.xxx` entries.
-- Keep function arg sets multiline and stable (commonly `{ config, lib, lib', pkgs, ... }:`).
+- Keep function arg sets multiline and stable (commonly `{ config, pkgs, lib, lib', ... }:` — `pkgs` after `config`, before `lib`).
 - Keep `let ... in` blocks focused and short.
 - Prefer `lib.mkIf` / `lib.mkMerge` over ad-hoc branching.
 - Prefer deterministic ordering for attrs and lists (alphabetic or conceptual groups).
