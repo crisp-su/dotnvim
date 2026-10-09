@@ -1,5 +1,5 @@
 {
-  description = "Cheng's Neovim (Nixvim) configuration!";
+  description = "Suu's Neovim (Nixvim) configuration";
 
   inputs = {
     nixpkgs.follows = "nixvim/nixpkgs";
@@ -90,7 +90,7 @@
               program = "${nvim}/bin/nvim";
 
               meta = {
-                description = "Neovim with Cheng's configuration.";
+                description = "Neovim with Suu's configuration.";
               };
             };
 

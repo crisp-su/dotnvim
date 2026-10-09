@@ -21,7 +21,7 @@ in
   imports = [ inputs.nixvim.homeModules.nixvim ];
 
   options.programs.dotnvim = {
-    enable = lib.mkEnableOption "Whether to enable Cheng's Nixvim configuration.";
+    enable = lib.mkEnableOption "Whether to enable Suu's configured Neovim.";
 
     useFlakeNixpkgs = lib.mkOption {
       type = lib.types.bool;
