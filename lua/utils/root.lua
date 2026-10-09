@@ -4,9 +4,7 @@
 --- @class RootUtil
 --- @overload fun(): string
 local M = setmetatable({}, {
-  __call = function(m)
-    return m.get()
-  end,
+  __call = function(m) return m.get() end,
 })
 
 --- @alias RootFn fun(buf: number): (string | string[])
@@ -34,9 +32,7 @@ function M.bufpath(buf)
   return M.norm(name)
 end
 
-function M.detectors.cwd()
-  return { M.norm(vim.uv.cwd()) }
-end
+function M.detectors.cwd() return { M.norm(vim.uv.cwd()) } end
 
 function M.detectors.lsp(buf)
   local bufpath = M.bufpath(buf)
@@ -48,9 +44,7 @@ function M.detectors.lsp(buf)
   local clients = vim.lsp.get_clients({ bufnr = buf })
 
   local ignore = vim.g.root_lsp_ignore or {}
-  clients = vim.tbl_filter(function(client)
-    return not vim.tbl_contains(ignore, client.name)
-  end, clients)
+  clients = vim.tbl_filter(function(client) return not vim.tbl_contains(ignore, client.name) end, clients)
 
   for _, client in pairs(clients) do
     local folders = client.config.workspace_folders
@@ -89,9 +83,7 @@ function M.resolve(spec)
   elseif type(spec) == 'function' then
     return spec
   end
-  return function(buf)
-    return M.detectors.pattern(buf, spec)
-  end
+  return function(buf) return M.detectors.pattern(buf, spec) end
 end
 
 --- @param opts? { buf?: number, spec?: RootSpec[], all?: boolean }
@@ -115,9 +107,7 @@ function M.detect(opts)
     end
 
     if #valid_paths > 0 then
-      table.sort(valid_paths, function(a, b)
-        return #a > #b
-      end)
+      table.sort(valid_paths, function(a, b) return #a > #b end)
       table.insert(results, { spec = spec, paths = valid_paths })
       if not opts.all then
         break
@@ -132,15 +122,15 @@ M.cache = {}
 function M.setup()
   local group = vim.api.nvim_create_augroup('SimpleRootCache', { clear = true })
 
-  vim.api.nvim_create_user_command('RootInfo', function()
-    M.info()
-  end, { desc = 'Neovim roots for the current buffer' })
+  vim.api.nvim_create_user_command(
+    'RootInfo',
+    function() M.info() end,
+    { desc = 'Neovim roots for the current buffer' }
+  )
 
   vim.api.nvim_create_autocmd({ 'LspAttach', 'BufWritePost', 'DirChanged' }, {
     group = group,
-    callback = function(ev)
-      M.cache[ev.buf] = nil
-    end,
+    callback = function(ev) M.cache[ev.buf] = nil end,
   })
 end
 

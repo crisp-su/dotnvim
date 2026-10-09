@@ -2,9 +2,7 @@ local M = {}
 
 local ts_action_state = require('utils').lazy_require('telescope.actions.state')
 
-local function telescope_title()
-  return 'Telescope'
-end
+local function telescope_title() return 'Telescope' end
 
 local function prompt_title()
   local bufnr = vim.api.nvim_get_current_buf()

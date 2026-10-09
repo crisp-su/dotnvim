@@ -15,12 +15,8 @@ function M.setup()
     snacks
       .toggle({
         name = 'Current Line Blame',
-        get = function()
-          return gs_config.current_line_blame
-        end,
-        set = function(state)
-          gs.toggle_current_line_blame(state)
-        end,
+        get = function() return gs_config.current_line_blame end,
+        set = function(state) gs.toggle_current_line_blame(state) end,
       })
       :map('<leader>;b')
   end

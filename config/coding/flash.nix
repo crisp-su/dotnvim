@@ -48,7 +48,7 @@
     (mkSpec
       [
         "s"
-        { __raw = "function() require('flash').jump() end"; }
+        { __raw = /* lua */ "function() require('flash').jump() end"; }
       ]
       {
         desc = "Flash Jump";
@@ -58,7 +58,7 @@
     (mkSpec
       [
         "S"
-        { __raw = "function() require('flash').treesitter() end"; }
+        { __raw = /* lua */ "function() require('flash').treesitter() end"; }
       ]
       {
         desc = "Flash Treesitter";

@@ -44,7 +44,7 @@
         "c"
         "cpp"
       ];
-      callback.__raw = "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'clangtidy' }) end";
+      callback.__raw = /* lua */ "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'clangtidy' }) end";
     }
   ];
 }

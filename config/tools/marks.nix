@@ -27,7 +27,7 @@
     (mkSpec
       [
         "m"
-        { __raw = "require('d.mark_operator')"; }
+        { __raw = /* lua */ "require('d.mark_operator')"; }
       ]
       {
         desc = "Mark...";
@@ -42,7 +42,7 @@
     (mkSpec
       [
         "<A-]>"
-        { __raw = "require('marks').next"; }
+        { __raw = /* lua */ "require('marks').next"; }
       ]
       {
         desc = "Move to Next Mark";
@@ -52,7 +52,7 @@
     (mkSpec
       [
         "<A-[>"
-        { __raw = "require('marks').prev"; }
+        { __raw = /* lua */ "require('marks').prev"; }
       ]
       {
         desc = "Move to Previous Mark";
@@ -63,7 +63,7 @@
     (mkSpec
       [
         "m,"
-        { __raw = "require('marks').set_next"; }
+        { __raw = /* lua */ "require('marks').set_next"; }
       ]
       {
         desc = "Set Available Mark";
@@ -77,7 +77,7 @@
     (mkSpec
       [
         "m;"
-        { __raw = "require('marks').toggle"; }
+        { __raw = /* lua */ "require('marks').toggle"; }
       ]
       {
         desc = "Toggle Line Mark";
@@ -91,7 +91,7 @@
     (mkSpec
       [
         "m:"
-        { __raw = "require('marks').preview"; }
+        { __raw = /* lua */ "require('marks').preview"; }
       ]
       {
         desc = "Preview Mark";
@@ -109,11 +109,7 @@
       group = "HighlightSet";
       desc = "Clear the MarkSignNumHL highlight group to disable highlighting marked line numbers";
       event = "VimEnter";
-      callback.__raw = /* lua */ ''
-        function()
-          vim.api.nvim_set_hl(0, 'MarkSignNumHL', {})
-        end
-      '';
+      callback.__raw = /* lua */ "function() vim.api.nvim_set_hl(0, 'MarkSignNumHL', {}) end";
     }
   ];
 

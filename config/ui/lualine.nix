@@ -18,7 +18,7 @@ with lib.nixvim.utils;
     settings = {
       extensions = [
         (lib.mkIf config.plugins.neo-tree.enable "neo-tree")
-        (lib.mkIf config.plugins.telescope.enable (mkRaw "require('d.lualine_telescope_extension')"))
+        (lib.mkIf config.plugins.telescope.enable (mkRaw /* lua */ "require('d.lualine_telescope_extension')"))
       ];
 
       options = {
@@ -42,14 +42,14 @@ with lib.nixvim.utils;
               fmt.__raw = /* lua */ ''
                 function(str)
                   local mode_map = {
-                    ['NORMAL']   = '(=^・・^=)',
-                    ['INSERT']   = 'φ(・∀・＊)',
-                    ['VISUAL']   = '┐(\'～`；)┌',
-                    ['V-LINE']   = '┐(\'～`；)┌',
-                    ['V-BLOCK']  = '┐(\'～`；)┌',
-                    ['SELECT']   = '┐(\'～`；)┌',
-                    ['COMMAND']  = '(´ー`)y-~~',
-                    ['REPLACE']  = '＼ ￣ヘ￣ ',
+                    ['NORMAL'] = '(=^・・^=)',
+                    ['INSERT'] = 'φ(・∀・＊)',
+                    ['VISUAL'] = "┐('～`；)┌",
+                    ['V-LINE'] = "┐('～`；)┌",
+                    ['V-BLOCK'] = "┐('～`；)┌",
+                    ['SELECT'] = "┐('～`；)┌",
+                    ['COMMAND'] = '(´ー`)y-~~',
+                    ['REPLACE'] = '＼ ￣ヘ￣ ',
                     ['TERMINAL'] = '  <コ:彡  ',
                   }
                   return mode_map[str] or str
@@ -81,7 +81,7 @@ with lib.nixvim.utils;
           )
         ];
         lualine_c = [
-          (mkRaw "Utils.lualine.root_dir()")
+          (mkRaw /* lua */ "Utils.lualine.root_dir()")
 
           (
             listToUnkeyedAttrs [ "diagnostics" ]
@@ -95,24 +95,16 @@ with lib.nixvim.utils;
             }
           )
 
-          (mkRaw "Utils.lualine.pretty_path()")
+          (mkRaw /* lua */ "Utils.lualine.pretty_path()")
         ];
 
         lualine_x = [
           (
             listToUnkeyedAttrs [
-              (mkRaw /* lua */ ''
-                function()
-                  return string.format("Recording @%s", vim.fn.reg_recording())
-                end
-              '')
+              (mkRaw /* lua */ "function() return string.format('Recording @%s', vim.fn.reg_recording()) end")
             ]
             // {
-              cond.__raw = /* lua */ ''
-                function()
-                  return vim.fn.reg_recording() ~= ""
-                end
-              '';
+              cond.__raw = /* lua */ "function() return vim.fn.reg_recording() ~= '' end";
 
               color = "@text.danger";
             }
@@ -120,11 +112,11 @@ with lib.nixvim.utils;
 
           (lib.mkIf config.plugins.noice.enable (
             listToUnkeyedAttrs [
-              (mkRaw "function() return require('noice').api.status.command.get() end")
+              (mkRaw /* lua */ "function() return require('noice').api.status.command.get() end")
             ]
             // {
-              cond.__raw = "function() return package.loaded['noice'] and require('noice').api.status.command.has() end";
-              color.__raw = "function() return { fg = Snacks.util.color('Statement') } end";
+              cond.__raw = /* lua */ "function() return package.loaded['noice'] and require('noice').api.status.command.has() end";
+              color.__raw = /* lua */ "function() return { fg = Snacks.util.color('Statement') } end";
             }
           ))
 
@@ -144,11 +136,7 @@ with lib.nixvim.utils;
           (
             listToUnkeyedAttrs [ "location" ]
             // {
-              fmt.__raw = /* lua */ ''
-                function(str)
-                  return string.format('[%s]', str)
-                end
-              '';
+              fmt.__raw = /* lua */ "function(str) return string.format('[%s]', str) end";
 
               padding = {
                 left = 1;

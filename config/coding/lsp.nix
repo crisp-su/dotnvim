@@ -12,7 +12,7 @@
     with lib'.icons;
     let
       languageIcon = {
-        __raw = "Utils.lsp.language_icon()";
+        __raw = /* lua */ "Utils.lsp.language_icon()";
       };
     in
     [
@@ -26,7 +26,7 @@
       (mkSpec
         [
           "<leader>cl"
-          { __raw = "function() Snacks.picker.lsp_config() end"; }
+          { __raw = /* lua */ "function() Snacks.picker.lsp_config() end"; }
         ]
         {
           desc = "Lsp Info";
@@ -38,78 +38,78 @@
       (mkSpec
         [
           "gd"
-          { __raw = "function() vim.lsp.buf.definition() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.definition() end"; }
         ]
         {
           desc = "Go to Definition";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('definition')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('definition')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gr"
-          { __raw = "function() vim.lsp.buf.references() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.references() end"; }
         ]
         {
           desc = "Go to References";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('references')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('references')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gI"
-          { __raw = "function() vim.lsp.buf.implementation() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.implementation() end"; }
         ]
         {
           desc = "Go to Implementation";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('implementation')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('implementation')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gY"
-          { __raw = "function() vim.lsp.buf.type_definition() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.type_definition() end"; }
         ]
         {
           desc = "Go to Type Definition";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('typeDefinition')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('typeDefinition')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gD"
-          { __raw = "function() vim.lsp.buf.declaration() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.declaration() end"; }
         ]
         {
           desc = "Go to Declaration";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('declaration')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('declaration')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "gO"
-          { __raw = "function() vim.lsp.buf.document_symbol() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.document_symbol() end"; }
         ]
         {
           desc = "List All Symbols";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('documentSymbol')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('documentSymbol')";
           refresh = true;
         }
       )
@@ -117,7 +117,7 @@
       (mkSpec
         [
           "K"
-          { __raw = "function() vim.lsp.buf.hover() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.hover() end"; }
         ]
         {
           desc = "Hover";
@@ -128,13 +128,13 @@
       (mkSpec
         [
           "gK"
-          { __raw = "function() vim.lsp.buf.signature_help() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.signature_help() end"; }
         ]
         {
           desc = "Signature Help";
           icon = languageIcon;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('signatureHelp')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('signatureHelp')";
           refresh = true;
         }
       )
@@ -142,26 +142,26 @@
       (mkSpec
         [
           "<leader>cr"
-          { __raw = "function() vim.lsp.buf.rename() end"; }
+          { __raw = /* lua */ "function() vim.lsp.buf.rename() end"; }
         ]
         {
           desc = "Rename";
           icon = common.Input.line;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('rename')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('rename')";
           refresh = true;
         }
       )
       (mkSpec
         [
           "<leader>cR"
-          { __raw = "function() Snacks.rename.rename_file() end"; }
+          { __raw = /* lua */ "function() Snacks.rename.rename_file() end"; }
         ]
         {
           desc = "Rename File";
           icon = common.Input.line;
           mode = modes.interact;
-          cond.__raw = "Utils.lsp.has_capability('workspace/willRenameFiles')";
+          cond.__raw = /* lua */ "Utils.lsp.has_capability('workspace/willRenameFiles')";
           refresh = true;
         }
       )
@@ -175,11 +175,7 @@
         "LspAttach"
         "LspDetach"
       ];
-      callback.__raw = /* lua */ ''
-        function()
-          Utils.wk.refresh()
-        end
-      '';
+      callback.__raw = /* lua */ "function() Utils.wk.refresh() end";
     }
   ];
 }

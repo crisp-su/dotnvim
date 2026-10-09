@@ -19,13 +19,9 @@ local function command_of(name)
   return name
 end
 
-local function is_executable(name)
-  return toolchain.exe_available(command_of(name))
-end
+local function is_executable(name) return toolchain.exe_available(command_of(name)) end
 
-local function is_fallback(name)
-  return toolchain.exe_is_fallback(command_of(name))
-end
+local function is_fallback(name) return toolchain.exe_is_fallback(command_of(name)) end
 
 --- Keep only linters provided by the environment (not the Nixvim fallback).
 --- @param names string[] candidates in priority order

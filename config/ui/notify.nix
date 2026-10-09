@@ -18,7 +18,7 @@
         TRACE = Trace.fill;
       };
 
-      render.__raw = "require('d.notify_render')";
+      render.__raw = /* lua */ "require('d.notify_render')";
     };
   };
 

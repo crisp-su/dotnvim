@@ -26,13 +26,9 @@ local pyright_settings = {
   },
 }
 
-local function join(root, name)
-  return root .. '/' .. name
-end
+local function join(root, name) return root .. '/' .. name end
 
-local function file_exists(root, name)
-  return vim.fn.filereadable(join(root, name)) == 1
-end
+local function file_exists(root, name) return vim.fn.filereadable(join(root, name)) == 1 end
 
 local function read_file(root, name)
   if not file_exists(root, name) then
@@ -66,13 +62,9 @@ local function has_any(tools)
   return false
 end
 
-local function executable(name)
-  return vim.fn.exepath(name) ~= ''
-end
+local function executable(name) return vim.fn.exepath(name) ~= '' end
 
-local function is_python_buffer(bufnr)
-  return vim.bo[bufnr].filetype == 'python'
-end
+local function is_python_buffer(bufnr) return vim.bo[bufnr].filetype == 'python' end
 
 --- @param bufnr number
 --- @return table
@@ -284,18 +276,19 @@ local function start_lsp(bufnr)
         if not pending_start[key] then
           pending_start[key] = true
 
-          vim.api.nvim_buf_call(bufnr, function()
-            vim.lsp.start({
-              cmd = cmd,
-              name = name,
-              root_dir = state.root,
-              settings = lsp_settings(name),
-            })
-          end)
+          vim.api.nvim_buf_call(
+            bufnr,
+            function()
+              vim.lsp.start({
+                cmd = cmd,
+                name = name,
+                root_dir = state.root,
+                settings = lsp_settings(name),
+              })
+            end
+          )
 
-          vim.defer_fn(function()
-            pending_start[key] = nil
-          end, 1000)
+          vim.defer_fn(function() pending_start[key] = nil end, 1000)
         end
       end
     end
@@ -339,9 +332,7 @@ function M.lint_buffer(bufnr)
     return
   end
 
-  vim.api.nvim_buf_call(bufnr, function()
-    lint.try_lint(linters)
-  end)
+  vim.api.nvim_buf_call(bufnr, function() lint.try_lint(linters) end)
 end
 
 --- @param bufnr number

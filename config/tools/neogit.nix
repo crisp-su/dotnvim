@@ -42,7 +42,7 @@
         [
           "<leader>gg"
           {
-            __raw = "function() vim.cmd.Neogit({ 'cwd=' .. vim.fn.fnameescape(Utils.root()) }) end";
+            __raw = /* lua */ "function() vim.cmd.Neogit({ 'cwd=' .. vim.fn.fnameescape(Utils.root()) }) end";
           }
         ]
         {

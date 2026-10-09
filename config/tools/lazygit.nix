@@ -12,7 +12,7 @@
       (mkSpec
         [
           "<leader>gl"
-          { __raw = "function() Snacks.lazygit() end"; }
+          { __raw = /* lua */ "function() Snacks.lazygit() end"; }
         ]
         {
           desc = "Lazygit";

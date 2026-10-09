@@ -11,7 +11,7 @@
   plugins.lint.lintersByFt.python = [ ];
 
   plugins.conform-nvim.settings.formatters_by_ft.python = {
-    __raw = "function(bufnr) return Utils.python.formatters(bufnr) end";
+    __raw = /* lua */ "function(bufnr) return Utils.python.formatters(bufnr) end";
   };
 
   autoCmd = [
@@ -19,14 +19,14 @@
       group = "Auto";
       event = "FileType";
       pattern = "python";
-      callback.__raw = "function(args) Utils.python.lint_buffer(args.buf) end";
+      callback.__raw = /* lua */ "function(args) Utils.python.lint_buffer(args.buf) end";
     }
 
     {
       group = "Auto";
       event = "BufWritePre";
       pattern = "*.py";
-      callback.__raw = "function(args) Utils.python.before_save(args.buf) end";
+      callback.__raw = /* lua */ "function(args) Utils.python.before_save(args.buf) end";
     }
 
     {
@@ -36,7 +36,7 @@
         "InsertLeave"
       ];
       pattern = "*.py";
-      callback.__raw = "function(args) Utils.python.lint_buffer(args.buf) end";
+      callback.__raw = /* lua */ "function(args) Utils.python.lint_buffer(args.buf) end";
     }
   ];
 }

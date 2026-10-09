@@ -22,17 +22,11 @@ local DETAIL_COLUMNS = {
   'mtime',
 }
 
-local function oil()
-  return require('oil')
-end
+local function oil() return require('oil') end
 
-local function actions()
-  return require('oil.actions')
-end
+local function actions() return require('oil.actions') end
 
-local function details_enabled()
-  return vim.g[DETAILS_ENABLED_KEY] == true
-end
+local function details_enabled() return vim.g[DETAILS_ENABLED_KEY] == true end
 
 local function oil_columns()
   if details_enabled() then
@@ -41,9 +35,7 @@ local function oil_columns()
   return DEFAULT_COLUMNS
 end
 
-local function apply_oil_columns()
-  oil().set_columns(oil_columns())
-end
+local function apply_oil_columns() oil().set_columns(oil_columns()) end
 
 local function format_dir_for_winbar(dir)
   if not dir or dir == '' then
@@ -63,9 +55,7 @@ local function tab_get_var(tab, key)
   return ok and value or nil
 end
 
-local function tab_del_var(tab, key)
-  pcall(vim.api.nvim_tabpage_del_var, tab, key)
-end
+local function tab_del_var(tab, key) pcall(vim.api.nvim_tabpage_del_var, tab, key) end
 
 local function is_blank_scratch(buf)
   if not vim.api.nvim_buf_is_valid(buf) then
@@ -298,9 +288,7 @@ function M.open_root_tab()
   open_tab(buf and root.get({ buf = buf }) or root())
 end
 
-function M.open_cwd_tab()
-  open_tab(vim.uv.cwd() or root())
-end
+function M.open_cwd_tab() open_tab(vim.uv.cwd() or root()) end
 
 function M.open_parent_tab()
   local buf = origin_buf() or vim.api.nvim_get_current_buf()
@@ -358,9 +346,7 @@ function M.toggle_details()
   apply_oil_columns()
 end
 
-function M.disable_preview(filename)
-  return vim.fn.getfsize(filename) > PREVIEW_MAX_BYTES
-end
+function M.disable_preview(filename) return vim.fn.getfsize(filename) > PREVIEW_MAX_BYTES end
 
 function M.winbar()
   local dir = oil().get_current_dir(0) or vim.uv.cwd() or ''
@@ -373,8 +359,6 @@ function M.winbar()
   return string.format(' Oil %s', dir)
 end
 
-function M.is_always_hidden(name, _)
-  return name == '.DS_Store'
-end
+function M.is_always_hidden(name, _) return name == '.DS_Store' end
 
 return M

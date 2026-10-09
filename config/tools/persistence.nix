@@ -17,7 +17,7 @@
     (mkSpec
       [
         "<leader>qs"
-        { __raw = "function() require('persistence').load() end"; }
+        { __raw = /* lua */ "function() require('persistence').load() end"; }
       ]
       {
         desc = "Restore Session";
@@ -27,7 +27,7 @@
     (mkSpec
       [
         "<leader>qS"
-        { __raw = "function() require('persistence').select() end"; }
+        { __raw = /* lua */ "function() require('persistence').select() end"; }
       ]
       {
         desc = "Select Session";
@@ -37,7 +37,7 @@
     (mkSpec
       [
         "<leader>qd"
-        { __raw = "function() require('persistence').stop() end"; }
+        { __raw = /* lua */ "function() require('persistence').stop() end"; }
       ]
       {
         desc = "Don't Save Current Session";
@@ -60,17 +60,15 @@
         end
       '';
     }
+
     {
       group = "HackFix";
       desc = "Reset scope state before persistence session load";
       event = "User";
       pattern = "PersistenceLoadPre";
-      callback.__raw = /* lua */ ''
-        function()
-          vim.g.ScopeState = nil
-        end
-      '';
+      callback.__raw = /* lua */ "function() vim.g.ScopeState = nil end";
     }
+
     {
       group = "HackFix";
       desc = "Restore scope state after persistence session load";

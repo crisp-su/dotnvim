@@ -8,5 +8,5 @@
   ];
 
   plugins.conform-nvim.settings.formatters_by_ft.html.__raw =
-    "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'prettierd' }) end";
+    /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'prettierd' }) end";
 }

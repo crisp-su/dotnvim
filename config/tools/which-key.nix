@@ -114,12 +114,8 @@
     };
 
     luaConfig = {
-      pre = /* lua */ ''
-        Utils.wk.setup_pre()
-      '';
-      post = /* lua */ ''
-        Utils.wk.setup_post()
-      '';
+      pre = /* lua */ "Utils.wk.setup_pre()";
+      post = /* lua */ "Utils.wk.setup_post()";
     };
   };
 

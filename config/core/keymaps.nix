@@ -97,7 +97,9 @@
             {
               __raw = /* lua */ ''
                 function()
-                  if not require('noice.lsp').scroll(4) then return '<c-f>' end
+                  if not require('noice.lsp').scroll(4) then
+                    return '<c-f>'
+                  end
                 end
               '';
             }
@@ -115,7 +117,9 @@
             {
               __raw = /* lua */ ''
                 function()
-                  if not require('noice.lsp').scroll(-4) then return '<c-b>' end
+                  if not require('noice.lsp').scroll(-4) then
+                    return '<c-b>'
+                  end
                 end
               '';
             }
@@ -210,7 +214,7 @@
         mkSpec
           [
             "<leader>bd"
-            { __raw = "function() Snacks.bufdelete() end"; }
+            { __raw = /* lua */ "function() Snacks.bufdelete() end"; }
           ]
           {
             desc = "Delete Buffer";
@@ -221,7 +225,7 @@
         mkSpec
           [
             "<leader>bo"
-            { __raw = "function() Snacks.bufdelete.other() end"; }
+            { __raw = /* lua */ "function() Snacks.bufdelete.other() end"; }
           ]
           {
             desc = "Delete Other Buffers";

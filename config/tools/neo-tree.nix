@@ -60,7 +60,7 @@
       [
         "<leader>fe"
         {
-          __raw = "function() require('neo-tree.command').execute({ toggle = true, dir = Utils.root() }) end";
+          __raw = /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = Utils.root() }) end";
         }
       ]
       {
@@ -72,7 +72,7 @@
       [
         "<leader>fE"
         {
-          __raw = "function() require('neo-tree.command').execute({ toggle = true, dir = vim.uv.cwd() }) end";
+          __raw = /* lua */ "function() require('neo-tree.command').execute({ toggle = true, dir = vim.uv.cwd() }) end";
         }
       ]
       {
@@ -84,7 +84,7 @@
       [
         "<leader>be"
         {
-          __raw = "function() require('neo-tree.command').execute({ source = 'buffers', toggle = true }) end";
+          __raw = /* lua */ "function() require('neo-tree.command').execute({ source = 'buffers', toggle = true }) end";
         }
       ]
       {
@@ -96,7 +96,7 @@
       [
         "<leader>ge"
         {
-          __raw = "function() require('neo-tree.command').execute({ source = 'git_status', toggle = true }) end";
+          __raw = /* lua */ "function() require('neo-tree.command').execute({ source = 'git_status', toggle = true }) end";
         }
       ]
       {
@@ -122,11 +122,7 @@
       group = "HackFix";
       desc = "Refresh Git status in Neo-tree when switching tabs";
       event = "TabEnter";
-      callback.__raw = /* lua */ ''
-        function()
-          require('neo-tree.events').fire_event('git_event')
-        end
-      '';
+      callback.__raw = /* lua */ "function() require('neo-tree.events').fire_event('git_event') end";
     }
   ];
 

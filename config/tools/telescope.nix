@@ -34,34 +34,30 @@
         prompt_prefix = icons.prompt.Input.line + " ";
         selection_caret = icons.prompt.ListSelection.line + " ";
 
-        create_layout.__raw = "require('d.telescope_layout')";
+        create_layout.__raw = /* lua */ "require('d.telescope_layout')";
 
         mappings = {
           i = {
             "<esc>".__raw = /* lua */ ''
               function(bufnr)
                 require('telescope.actions').close(bufnr)
-                vim.schedule(function()
-                  vim.cmd.stopinsert()
-                end)
+                vim.schedule(function() vim.cmd.stopinsert() end)
               end
             '';
 
-            "<C-j>".__raw = "require('telescope.actions').move_selection_next";
-            "<C-k>".__raw = "require('telescope.actions').move_selection_previous";
-            "<C-d>".__raw = "require('telescope.actions').results_scrolling_down";
-            "<C-u>".__raw = "require('telescope.actions').results_scrolling_up";
-            "<C-f>".__raw = "require('telescope.actions').preview_scrolling_down";
-            "<C-b>".__raw = "require('telescope.actions').preview_scrolling_up";
-            "<A-n>".__raw = "require('telescope.actions').cycle_history_next";
-            "<A-p>".__raw = "require('telescope.actions').cycle_history_prev";
+            "<C-j>".__raw = /* lua */ "require('telescope.actions').move_selection_next";
+            "<C-k>".__raw = /* lua */ "require('telescope.actions').move_selection_previous";
+            "<C-d>".__raw = /* lua */ "require('telescope.actions').results_scrolling_down";
+            "<C-u>".__raw = /* lua */ "require('telescope.actions').results_scrolling_up";
+            "<C-f>".__raw = /* lua */ "require('telescope.actions').preview_scrolling_down";
+            "<C-b>".__raw = /* lua */ "require('telescope.actions').preview_scrolling_up";
+            "<A-n>".__raw = /* lua */ "require('telescope.actions').cycle_history_next";
+            "<A-p>".__raw = /* lua */ "require('telescope.actions').cycle_history_prev";
 
             "<cr>".__raw = /* lua */ ''
               function(bufnr)
                 require('telescope.actions').select_default(bufnr)
-                vim.schedule(function()
-                  vim.cmd.stopinsert()
-                end)
+                vim.schedule(function() vim.cmd.stopinsert() end)
               end
             '';
           };
@@ -105,7 +101,7 @@
         [
           "<leader>ff"
           {
-            __raw = "function() require('telescope.builtin').find_files({ cwd = Utils.root() }) end";
+            __raw = /* lua */ "function() require('telescope.builtin').find_files({ cwd = Utils.root() }) end";
           }
         ]
         {
@@ -118,7 +114,7 @@
         [
           "<leader>fF"
           {
-            __raw = "function() require('telescope.builtin').find_files({ cwd = vim.uv.cwd() }) end";
+            __raw = /* lua */ "function() require('telescope.builtin').find_files({ cwd = vim.uv.cwd() }) end";
           }
         ]
         {
@@ -131,7 +127,7 @@
         [
           "<leader>fg"
           {
-            __raw = "function() require('telescope.builtin').live_grep({ cwd = Utils.root() }) end";
+            __raw = /* lua */ "function() require('telescope.builtin').live_grep({ cwd = Utils.root() }) end";
           }
         ]
         {
@@ -144,7 +140,7 @@
         [
           "<leader>fG"
           {
-            __raw = "function() require('telescope.builtin').live_grep({ cwd = vim.uv.cwd() }) end";
+            __raw = /* lua */ "function() require('telescope.builtin').live_grep({ cwd = vim.uv.cwd() }) end";
           }
         ]
         {
@@ -157,7 +153,7 @@
         [
           "<leader>fb"
           {
-            __raw = "function() require('telescope.builtin').buffers({ sort_mru = true, sort_lastused = true }) end";
+            __raw = /* lua */ "function() require('telescope.builtin').buffers({ sort_mru = true, sort_lastused = true }) end";
           }
         ]
         {
@@ -197,7 +193,7 @@
           [
             "<leader>fB"
             {
-              __raw = "function() require('telescope.builtin').buffers() end";
+              __raw = /* lua */ "function() require('telescope.builtin').buffers() end";
             }
           ]
           {
@@ -210,7 +206,7 @@
         [
           "<leader>fh"
           {
-            __raw = "function() require('telescope.builtin').help_tags() end";
+            __raw = /* lua */ "function() require('telescope.builtin').help_tags() end";
           }
         ]
         {
@@ -223,7 +219,7 @@
         [
           "<leader>fP"
           {
-            __raw = "function() require('telescope').extensions.media_files.media_files() end";
+            __raw = /* lua */ "function() require('telescope').extensions.media_files.media_files() end";
           }
         ]
         {

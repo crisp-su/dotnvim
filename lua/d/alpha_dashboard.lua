@@ -196,9 +196,7 @@ local elements = {
 
   --- @param percent number
   --- @return number
-  DynPaddingTop = function(percent)
-    return vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * percent) })
-  end,
+  DynPaddingTop = function(percent) return vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * percent) }) end,
 }
 
 local header = {

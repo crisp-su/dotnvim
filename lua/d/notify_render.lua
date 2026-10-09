@@ -1,6 +1,4 @@
-local function get_width(text)
-  return text and vim.api.nvim_strwidth(text) or 0
-end
+local function get_width(text) return text and vim.api.nvim_strwidth(text) or 0 end
 
 local function render(bufnr, notif, highlights, config)
   local api = vim.api

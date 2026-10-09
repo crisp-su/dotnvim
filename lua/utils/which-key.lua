@@ -16,9 +16,7 @@ function M.setup_pre()
   M.set_wk_plugins()
 end
 
-function M.setup_post()
-  M.set_autocmds()
-end
+function M.setup_post() M.set_autocmds() end
 
 --- @alias WkEntryId number
 --- @alias WkEntryTs number
@@ -189,16 +187,12 @@ function M.get_entry_prop_value(entry, lhs, prop)
 end
 
 --- @param entry WkEntry
-function M.history:insert(entry)
-  table.insert(self.store, entry)
-end
+function M.history:insert(entry) table.insert(self.store, entry) end
 
 --- @param id WkEntryId
 --- @return WkEntry?
 function M.history:find_by_id(id)
-  local entry = vim.iter(self.store):find(function(e)
-    return e.id == id
-  end)
+  local entry = vim.iter(self.store):find(function(e) return e.id == id end)
 
   return entry
 end
@@ -265,9 +259,7 @@ end
 
 --- @param lhs WkMappingLhs
 --- @return WkEntry[]?
-function M.history:find_all_by_lhs(lhs)
-  return self.index[lhs]
-end
+function M.history:find_all_by_lhs(lhs) return self.index[lhs] end
 
 --- @param query_props WkMappingProps
 --- @return { lhs: string, entry: WkEntry, props: table }[]
@@ -307,9 +299,7 @@ function M.history:find_all_latest_by_props(query_props)
 end
 
 --- @return { lhs: string, entry: WkEntry, props: table }[]
-function M.history:find_all_refresh_enabled()
-  return self:find_all_latest_by_props({ refresh = true })
-end
+function M.history:find_all_refresh_enabled() return self:find_all_latest_by_props({ refresh = true }) end
 
 function M.history:cleanup_history()
   local seen = {}
@@ -512,8 +502,6 @@ function M.override_wk_show()
   end
 end
 
-function M.set_wk_plugins()
-  package.loaded['which-key.plugins.presets'] = require('d.which_key_presets_plugin')
-end
+function M.set_wk_plugins() package.loaded['which-key.plugins.presets'] = require('d.which_key_presets_plugin') end
 
 return M

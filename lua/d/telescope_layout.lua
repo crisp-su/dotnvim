@@ -8,17 +8,13 @@ local function create_layout(picker)
 
   --- @param title string
   --- @return string
-  local function format_title_text(title)
-    return string.format(' %s ', title)
-  end
+  local function format_title_text(title) return string.format(' %s ', title) end
 
   local function make_popup(opts)
     local popup = NuiPopup(opts)
 
     --- @diagnostic disable-next-line: inject-field
-    function popup.border:change_title(title)
-      popup.border.set_text(popup.border, 'top', format_title_text(title))
-    end
+    function popup.border:change_title(title) popup.border.set_text(popup.border, 'top', format_title_text(title)) end
 
     return TSLayout.Window(popup)
   end
@@ -95,9 +91,7 @@ local function create_layout(picker)
   layout.results = results
   layout.preview = preview
 
-  function layout:update()
-    update_layout(self, { size = get_layout_size() }, box)
-  end
+  function layout:update() update_layout(self, { size = get_layout_size() }, box) end
 
   return TSLayout(layout)
 end

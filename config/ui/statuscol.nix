@@ -29,7 +29,7 @@
         {
           text = [
             {
-              __raw = "require('statuscol.builtin').foldfunc";
+              __raw = /* lua */ "require('statuscol.builtin').foldfunc";
             }
           ];
           click = "v:lua.ScFa";
@@ -56,12 +56,12 @@
         {
           condition = [
             {
-              __raw = "require('statuscol.builtin').not_empty";
+              __raw = /* lua */ "require('statuscol.builtin').not_empty";
             }
           ];
           text = [
             {
-              __raw = "require('statuscol.builtin').lnumfunc";
+              __raw = /* lua */ "require('statuscol.builtin').lnumfunc";
             }
           ];
           click = "v:lua.ScLa";
@@ -103,7 +103,9 @@
         function()
           if not _G.__statuscol_cfg_cache then
             local ok, m = pcall(require, 'statuscol')
-            if not ok then return end
+            if not ok then
+              return
+            end
 
             for i = 1, 20 do
               local name, value = debug.getupvalue(m.setup, i)
@@ -115,10 +117,12 @@
           end
 
           local cfg = _G.__statuscol_cfg_cache
-          if not cfg or not cfg.ft_ignore then return end
+          if not cfg or not cfg.ft_ignore then
+            return
+          end
 
           if vim.bo.buftype == 'nofile' or vim.tbl_contains(cfg.ft_ignore, vim.bo.filetype) then
-            vim.opt_local.statuscolumn = ""
+            vim.opt_local.statuscolumn = ''
             vim.opt_local.signcolumn = 'no'
             vim.opt_local.foldcolumn = '0'
           end
@@ -134,7 +138,7 @@
       callback.__raw = /* lua */ ''
         function(args)
           vim.schedule(function()
-            vim.opt_local.statuscolumn = ""
+            vim.opt_local.statuscolumn = ''
             vim.opt_local.signcolumn = 'no'
             vim.opt_local.foldcolumn = '0'
           end)

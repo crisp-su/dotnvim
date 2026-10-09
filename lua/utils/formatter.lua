@@ -11,9 +11,7 @@ local function command_of(name)
   if ok then
     -- `conform.formatters` lazily requires the formatter module on index,
     -- which raises for names that are not conform formatters.
-    local indexed, formatter = pcall(function()
-      return formatters[name]
-    end)
+    local indexed, formatter = pcall(function() return formatters[name] end)
 
     if indexed and type(formatter) == 'table' and type(formatter.command) == 'string' then
       return formatter.command
@@ -23,13 +21,9 @@ local function command_of(name)
   return name
 end
 
-local function is_executable(name)
-  return toolchain.exe_available(command_of(name))
-end
+local function is_executable(name) return toolchain.exe_available(command_of(name)) end
 
-local function is_fallback(name)
-  return toolchain.exe_is_fallback(command_of(name))
-end
+local function is_fallback(name) return toolchain.exe_is_fallback(command_of(name)) end
 
 --- Keep only formatters provided by the environment (not the Nixvim fallback).
 --- @param names string[] candidates in priority order

@@ -24,12 +24,8 @@ end
 --- @param status_fn fun(): nil | "ok" | "error" | "pending"
 function M.status(icon, status_fn)
   return {
-    function()
-      return icon
-    end,
-    cond = function()
-      return status_fn() ~= nil
-    end,
+    function() return icon end,
+    cond = function() return status_fn() ~= nil end,
     color = function()
       local s = status_fn() or 'ok'
       return { fg = get_color(status_colors[s]) }

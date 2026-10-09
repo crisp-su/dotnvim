@@ -7,16 +7,8 @@
 
     settings = {
       hooks = {
-        post_tab_enter.__raw = /* lua */ ''
-          function()
-            vim.cmd.redrawtabline()
-          end
-        '';
-        post_tab_close.__raw = /* lua */ ''
-          function()
-            vim.cmd.redrawtabline()
-          end
-        '';
+        post_tab_enter.__raw = /* lua */ "function() vim.cmd.redrawtabline() end";
+        post_tab_close.__raw = /* lua */ "function() vim.cmd.redrawtabline() end";
       };
     };
   };

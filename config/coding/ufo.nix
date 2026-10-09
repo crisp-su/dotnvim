@@ -8,7 +8,7 @@
     ];
 
     settings = {
-      fold_virt_text_handler.__raw = "require('d.ufo_fold_virt_text_handler')";
+      fold_virt_text_handler.__raw = /* lua */ "require('d.ufo_fold_virt_text_handler')";
     };
   };
 

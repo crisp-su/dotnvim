@@ -8,8 +8,8 @@
       options = {
         diagnostics = "nvim_lsp";
 
-        close_command.__raw = "function(n) Snacks.bufdelete(n) end";
-        right_mouse_command.__raw = "function(n) Snacks.bufdelete(n) end";
+        close_command.__raw = /* lua */ "function(n) Snacks.bufdelete(n) end";
+        right_mouse_command.__raw = /* lua */ "function(n) Snacks.bufdelete(n) end";
 
         always_show_bufferline = false;
         auto_toggle_bufferline = true;

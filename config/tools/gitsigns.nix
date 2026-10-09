@@ -98,7 +98,7 @@
     (mkSpec
       [
         "]H"
-        { __raw = "function() require('gitsigns').nav_hunk('last') end"; }
+        { __raw = /* lua */ "function() require('gitsigns').nav_hunk('last') end"; }
       ]
       {
         desc = "Last Hunk";
@@ -108,7 +108,7 @@
     (mkSpec
       [
         "[H"
-        { __raw = "function() require('gitsigns').nav_hunk('first') end"; }
+        { __raw = /* lua */ "function() require('gitsigns').nav_hunk('first') end"; }
       ]
       {
         desc = "First Hunk";
@@ -119,7 +119,7 @@
     (mkSpec
       [
         "<space>gd"
-        { __raw = "function() require('gitsigns').diffthis() end"; }
+        { __raw = /* lua */ "function() require('gitsigns').diffthis() end"; }
       ]
       {
         desc = "Diff This";
@@ -129,7 +129,7 @@
     (mkSpec
       [
         "<space>gd"
-        { __raw = "function() require('gitsigns').diffthis() end"; }
+        { __raw = /* lua */ "function() require('gitsigns').diffthis() end"; }
       ]
       {
         desc = "Diff This";

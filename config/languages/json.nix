@@ -23,7 +23,7 @@
   };
 
   plugins.conform-nvim.settings.formatters_by_ft.json.__raw =
-    "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
+    /* lua */ "function() return Utils.formatter.pick({ 'oxfmt', 'deno_fmt', 'eslint_d', 'prettierd' }) end";
 
   plugins.schemastore.json = {
     enable = true;

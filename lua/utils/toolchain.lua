@@ -6,9 +6,7 @@ M.fallback_bins = {}
 
 --- @param exe string executable name or absolute path
 --- @return boolean
-function M.exe_available(exe)
-  return vim.fn.executable(exe) == 1
-end
+function M.exe_available(exe) return vim.fn.executable(exe) == 1 end
 
 --- Whether the executable resolves to a Nixvim-provided fallback binary,
 --- i.e. it is not provided by the environment (devshell, system, etc.).
