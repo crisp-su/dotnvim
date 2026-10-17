@@ -31,6 +31,8 @@
         "keywords"
       ];
 
+      cursor_symbol = "-";
+
       diagnostics_hint_symbol = "!";
       diagnostics_info_symbol = "!";
       diagnostics_warn_symbol = "!";
