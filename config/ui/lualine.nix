@@ -48,7 +48,7 @@ with lib.nixvim.utils;
                     ['V-LINE'] = "┐('～`；)┌",
                     ['V-BLOCK'] = "┐('～`；)┌",
                     ['SELECT'] = "┐('～`；)┌",
-                    ['COMMAND'] = '(´ー`)y-~~',
+                    ['COMMAND'] = "(˶' ꒳ '˶)",
                     ['REPLACE'] = '＼ ￣ヘ￣ ',
                     ['TERMINAL'] = '  <コ:彡  ',
                   }
