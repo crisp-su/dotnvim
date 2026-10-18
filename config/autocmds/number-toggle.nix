@@ -12,7 +12,6 @@
 
           if vim.opt_local.relativenumber:get() then
             vim.opt_local.relativenumber = false
-            vim.cmd.redraw()
           end
         end
       '';

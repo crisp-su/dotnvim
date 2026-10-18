@@ -22,7 +22,9 @@ with lib.nixvim.utils;
       ];
 
       options = {
-        refresh_time = 16;
+        refresh = {
+          statusline = 16;
+        };
 
         section_separators = {
           left = "";
