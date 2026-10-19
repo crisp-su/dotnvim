@@ -36,7 +36,7 @@
       (mkSpec
         [
           "gd"
-          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.definition() end")
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').lsp_definitions() end")
         ]
         {
           desc = "Go to Definition";
@@ -49,7 +49,7 @@
       (mkSpec
         [
           "gr"
-          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.references() end")
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').lsp_references() end")
         ]
         {
           desc = "Go to References";
@@ -62,7 +62,7 @@
       (mkSpec
         [
           "gI"
-          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.implementation() end")
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').lsp_implementations() end")
         ]
         {
           desc = "Go to Implementation";
@@ -75,7 +75,7 @@
       (mkSpec
         [
           "gY"
-          (lib.nixvim.mkRaw /* lua */ "function() vim.lsp.buf.type_definition() end")
+          (lib.nixvim.mkRaw /* lua */ "function() require('telescope.builtin').lsp_type_definitions() end")
         ]
         {
           desc = "Go to Type Definition";
