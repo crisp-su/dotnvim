@@ -42,7 +42,7 @@
 
         menu = {
           auto_show = true;
-          auto_show_delay_ms = 300;
+          auto_show_delay_ms = 100;
 
           draw = {
             columns = [
