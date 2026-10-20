@@ -1,6 +1,16 @@
+{ pkgs, ... }:
+
 {
   plugins.tiny-inline-diagnostic = {
     enable = true;
+    package = pkgs.vimPlugins.tiny-inline-diagnostic-nvim.overrideAttrs {
+      patches = [
+        # Patch: `setlocal nobuflisted` (scope.nvim on TabLeave) fires BufDelete on
+        # live buffers, which made the plugin detach permanently until LspRestart.
+        # Defer the detach until the buffer is actually gone.
+        ../../patches/tiny-inline-diagnostic-fix-bufdelete.patch
+      ];
+    };
 
     lazyLoad.settings.event = [
       "LspAttach"
