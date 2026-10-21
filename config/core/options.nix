@@ -34,6 +34,7 @@
 
     autowrite = false;
     confirm = true;
+    backupcopy = "yes";
     swapfile = false;
     undofile = true;
     undolevels = 25600;
