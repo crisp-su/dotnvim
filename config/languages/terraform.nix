@@ -15,6 +15,12 @@
 
   plugins.conform-nvim.settings.formatters_by_ft.terraform = [ "terraform_fmt" ];
 
+  filetype = {
+    pattern = {
+      ".*%.tf" = "terraform";
+    };
+  };
+
   autoCmd = [
     {
       group = "Auto";
