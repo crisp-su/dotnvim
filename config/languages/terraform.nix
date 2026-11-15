@@ -1,9 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   extraPackagesAfter = with pkgs; [
     terraform
-    tflint
   ];
 
   plugins.lsp.servers.terraformls = {
@@ -11,7 +10,10 @@
     packageFallback = true;
   };
 
-  plugins.lint.lintersByFt.terraform = [ ];
+  plugins.lsp.servers.tflint = {
+    enable = true;
+    packageFallback = true;
+  };
 
   plugins.conform-nvim.settings.formatters_by_ft.terraform = [ "terraform_fmt" ];
 
@@ -20,15 +22,4 @@
       ".*%.tf" = "terraform";
     };
   };
-
-  autoCmd = [
-    {
-      group = "Auto";
-      event = "FileType";
-      pattern = "terraform";
-      callback =
-        lib.nixvim.mkRaw
-          /* lua */ "function(args) Utils.linter.set_external_linters(vim.bo[args.buf].filetype, { 'tflint' }) end";
-    }
-  ];
 }
