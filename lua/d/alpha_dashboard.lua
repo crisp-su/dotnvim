@@ -34,6 +34,7 @@ local elements = {
         },
         hl = '@function',
       },
+
       ['Neovim Sharp'] = {
         value = {
           [=[                                                                       ]=],
@@ -49,6 +50,7 @@ local elements = {
         },
         hl = '@function',
       },
+
       ['Pacman Map'] = {
         value = {
           [=[ ================================================. ]=],
@@ -65,6 +67,7 @@ local elements = {
         },
         hl = '@constructor',
       },
+
       ['My Neighbor Totoro'] = {
         value = {
           [=[  _____                                                       ]=],
@@ -109,16 +112,14 @@ local elements = {
 
     local opts = {
       position = 'center',
-      width = 64,
-      cursor = 3,
+      width = 60,
+      cursor = 1,
 
       shortcut = lhs,
       align_shortcut = 'right',
     }
 
     local on_press = nil
-
-    local icon_end_byte = label:find('%s') or 0
 
     if rhs then
       rhs = get_final_keymap_rhs(rhs)
@@ -142,8 +143,9 @@ local elements = {
     end
 
     opts.hl = {
-      { '@keyword', 0, icon_end_byte },
-      { '@function', icon_end_byte, #label },
+      { '@punctuation', 0, 3 },
+      { '@keyword', 5, 7 },
+      { '@function', 8, #label },
     }
     opts.hl_shortcut = '@character'
 
@@ -164,9 +166,9 @@ local elements = {
         local nvim_version = vim.version()
         local nvim_version_str = string.format('%d.%d', nvim_version.major, nvim_version.minor)
 
-        local str = '[ '
-          .. utils.strings.pad_center_text_line(string.format('NEOVIM v%s', nvim_version_str), '=', 64, 2)
-          .. ' ]'
+        local str = '* '
+          .. utils.strings.pad_center_text_line(string.format('Neovim v%s', nvim_version_str), '-', 60, 2)
+          .. ' *'
         return str
       end,
 
@@ -183,7 +185,7 @@ local elements = {
       type = 'text',
 
       val = function()
-        local str = '[ ' .. utils.strings.pad_center_text_line('', '=', 64, 0) .. ' ]'
+        local str = '* ' .. utils.strings.pad_center_text_line('', '-', 60, 0) .. ' *'
         return str
       end,
 
@@ -216,18 +218,19 @@ local actions = {
   type = 'group',
 
   val = {
-    elements.ActionButton('󰈔  New File', 'n', '<leader>fn'),
-    elements.ActionButton('󰙅  NeoTree', 'e', '<leader>fe'),
-    elements.ActionButton('󰙅  Oil', '-', '<leader>fo'),
-    elements.ActionButton('󱡠  Find Files', 'f', '<leader>ff'),
-    elements.ActionButton('󱡠  Live Grep', '/', '<leader>fg'),
-    elements.ActionButton('󰊢  Neogit', 'g', '<leader>gg'),
-    elements.ActionButton('󰆓  Last Session', 's', '<leader>qs'),
-    elements.ActionButton('󰈆  Quit', 'q', '<leader>qq'),
+    elements.ActionButton('[ ]  󰈔  New File', 'n', '<leader>fn'),
+    elements.ActionButton('[ ]  󰙅  NeoTree', 'e', '<leader>fe'),
+    elements.ActionButton('[ ]  󰙅  Oil', '-', '<leader>fo'),
+    elements.ActionButton('[ ]  󱡠  Find Files', 'f', '<leader>ff'),
+    elements.ActionButton('[ ]  󱡠  Live Grep', '/', '<leader>fg'),
+    elements.ActionButton('[ ]  󰊢  Neogit', 'g', '<leader>gg'),
+    elements.ActionButton('[ ]  󰆓  Last Session', 's', '<leader>qs'),
+    elements.ActionButton('[ ]  󰈆  Quit', 'q', '<leader>qq'),
+    { type = 'padding', val = 1 },
   },
 
   opts = {
-    spacing = 1,
+    spacing = 0,
   },
 }
 
@@ -249,15 +252,13 @@ local section = {
   footer = footer,
 }
 
-local padding_top = elements.DynPaddingTop(0.18)
+local padding_top = elements.DynPaddingTop(0.21)
 
 local config = {
   layout = {
     { type = 'padding', val = padding_top },
     section.header,
-    { type = 'padding', val = 2 },
     section.actions,
-    { type = 'padding', val = 2 },
     section.footer,
   },
 
